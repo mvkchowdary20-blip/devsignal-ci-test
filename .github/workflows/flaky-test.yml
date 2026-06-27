@@ -1,0 +1,21 @@
+name: Flaky Test (50% failure)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  flaky:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Random pass or fail
+        run: |
+          echo "Simulating a flaky test..."
+          python3 -c "
+          import random, sys
+          result = random.choice([0, 1])
+          print(f'Result: {result}')
+          sys.exit(result)
+          "
