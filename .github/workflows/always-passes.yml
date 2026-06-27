@@ -1,0 +1,17 @@
+name: Always Passing Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Successful build
+        run: |
+          echo "This workflow always passes"
+          echo "DevSignal should show 0% failure rate"
+          echo "Build complete ✅"
