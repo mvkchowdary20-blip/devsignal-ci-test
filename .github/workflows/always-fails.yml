@@ -1,0 +1,17 @@
+name: Always Failing Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Intentional failure
+        run: |
+          echo "This workflow always fails"
+          echo "DevSignal should detect 100% failure rate"
+          exit 1
