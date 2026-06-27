@@ -1,0 +1,21 @@
+name: Slow Then Fail
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  slow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Simulate slow job
+        run: |
+          echo "Running long task..."
+          sleep 30
+          echo "Task complete"
+      - name: Fail after slow job
+        run: |
+          echo "Failing after wasting compute time"
+          exit 1
